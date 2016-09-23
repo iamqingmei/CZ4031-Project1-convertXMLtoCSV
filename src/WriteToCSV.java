@@ -11,8 +11,8 @@ import java.util.Set;
 
 public class WriteToCSV {
 	private ArrayList<Authored> authoredList;
-	private long authorID;
-	private long pubID;
+	private long authorId;
+	private long pubId;
 	private File file;
 	private FileWriter fileWriter;
 	private ArrayList<Author> authorList = new ArrayList<Author>();
@@ -27,14 +27,14 @@ public class WriteToCSV {
 	
 	public WriteToCSV(ArrayList<Authored> authoredList){
 		this.authoredList = authoredList;
-		setPubID();
+		setPubId();
 	}
 	
-	public long getAuthorID(){
-		return ++authorID;
+	public long getAuthorId(){
+		return ++authorId;
 	}
-	public long getPubID(){
-		return ++pubID;
+	public long getPubId(){
+		return ++pubId;
 	}
 	
 	public void getFile(String path){
@@ -54,10 +54,10 @@ public class WriteToCSV {
 			System.out.println("FileWriter error :"+path);
 		}
 	}
-	public void setPubID(){
+	public void setPubId(){
 		int i;
 		for(i=0;i<this.authoredList.size();i++){
-			authoredList.get(i).getPublication().setPubID(getPubID());
+			authoredList.get(i).getPublication().setPubId(getPubId());
 		}
 		System.out.println("set pub ID done:"+i);
 	}
@@ -95,13 +95,13 @@ public class WriteToCSV {
 		for(int i=0;i<this.authoredList.size();i++){
 			publication = this.authoredList.get(i).getPublication();
 				try {
-					fileWriter.append(publication.getPubID()+",");
+					fileWriter.append(publication.getPubId()+",");
 					fileWriter.append(hasComma(publication.getPubKey())+",");
 					fileWriter.append(hasComma(publication.getTitle())+",");
 					fileWriter.append(hasComma(publication.getYear()));
 					fileWriter.append("\r\n");
 				} catch (IOException e) {
-					System.out.println("Error at publication:"+e+","+publication.getPubID());
+					System.out.println("Error at publication:"+e+","+publication.getPubId());
 					System.exit(0);
 				}
 		}
@@ -115,12 +115,13 @@ public class WriteToCSV {
 			publication = this.authoredList.get(i).getPublication();
 			if(publication instanceof Book){
 				try {
-					fileWriter.append(publication.getPubID()+",");
+					fileWriter.append(publication.getPubId()+",");
+					fileWriter.append(hasComma(((Book) publication).getBooktitle())+",");
+					fileWriter.append(hasComma(((Book) publication).getSeries())+",");
 					fileWriter.append(hasComma(((Book) publication).getPublisher())+",");
-					fileWriter.append(hasComma(((Book) publication).getISBN()));
 					fileWriter.append("\r\n");
 				} catch (IOException e) {
-					System.out.println("Error at book:"+e+","+publication.getPubID());
+					System.out.println("Error at book:"+e+","+publication.getPubId());
 					System.exit(0);
 				}
 		}
