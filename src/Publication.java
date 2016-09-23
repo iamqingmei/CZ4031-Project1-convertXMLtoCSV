@@ -4,7 +4,7 @@ public class Publication {
 	private long pubId;
 	private String pubKey;
 	private String title;
-	private long year;
+	private String year;
 
 	public long getPubId() {
 		return this.pubId;
@@ -32,11 +32,11 @@ public class Publication {
 		this.title = title;
 	}
 
-	public long getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(long year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 
