@@ -46,6 +46,8 @@ public ArrayList<Authored> getXml(){
 	  
 	  //author
 	  boolean authorTag = false;
+	  boolean nameTag = false;
+	  boolean authorIdTag = false;
 	  
 	  //book
 	  boolean booktitleTag = false;
@@ -63,6 +65,9 @@ public ArrayList<Authored> getXml(){
 	  
 	  //publication
 	  boolean yearTag = false;
+	  boolean titleTag = false;
+	  boolean pubKeyTag = false;
+	  boolean pubIdTag = false;
 	  
 	  String elementTag = "";
 	  
