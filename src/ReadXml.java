@@ -71,9 +71,23 @@ public ArrayList<Authored> getXml(){
 	  
 	  //publication
 	  boolean yearTag = false;
+
+
+      //proceedings
+      boolean proceedingsTag = false;
+      boolean proceedingsISBNTag = false;
+      boolean proceedingsPublisherTag = false;
+      boolean proceedingsBookTitleTag = false;
+
+      //phdthesis
+      boolean phdthesisTag = false;
+      boolean phdthesisSchool = false;
+      boolean phdthesisNote = false;
+
 	  boolean titleTag = false;
 	  boolean pubKeyTag = false;
 	  boolean pubIdTag = false;
+
 	  
 	  String elementTag = "";
 	  
@@ -113,6 +127,22 @@ public ArrayList<Authored> getXml(){
     		publication.setPubKey(attributes.getValue("key"));
     		incollectionTag = true;
     	}
+        else if(qName.compareToIgnoreCase("proceedings")==0){
+            proceedingsTag = true;
+            authored = new Authored();
+            authorList = new ArrayList<Author>();
+            publication = new Proceedings();
+            publication.setPubId(generatePublicationID());
+            publication.setPubKey(attributes.getValue("Key"));
+        }
+        else if(qName.compareToIgnoreCase("phdthesis")==0){
+            phdthesisTag = true;
+            authored = new Authored();
+            authorList = new ArrayList<Author>();
+            publication = new Phdthesis();
+            publication.setPubId(generatePublicationID());
+            publication.setPubKey(attributes.getValue("Key"));
+        }
     	
     	elementTag = qName;
     	//System.out.println(qName);
@@ -212,6 +242,45 @@ public ArrayList<Authored> getXml(){
     			((Incollection)publication).setISBN(new String(ch, start, length));
     		}
     	}
+        else if(proceedingsTag){
+            if(elementTag.compareToIgnoreCase("title")==0){
+                publication.setTitle(new String(ch,start, length));
+            }
+            else if(elementTag.compareToIgnoreCase("year") ==0){
+                publication.setYear(new String(ch, start, length));
+            }
+            else if(elementTag.compareToIgnoreCase("author")==0){
+                author = new Author(new String(ch, start, length));
+                authorList.add(author);
+            }
+            else if(elementTag.compareToIgnoreCase("booktitle")==0){
+                ((Proceedings)publication).setBookTitle(new String(ch, start, length));
+            }
+            else if(elementTag.compareToIgnoreCase("isbn")==0){
+                ((Proceedings)publication).setISBN(new String(ch, start, length));
+            }
+            else if(elementTag.compareToIgnoreCase("publisher")==0){
+                ((Proceedings)publication).setPublisher(new String(ch, start, length));
+            }
+        }
+        else if (phdthesisTag){
+            if(elementTag.compareToIgnoreCase("title")==0){
+                publication.setTitle(new String(ch,start,length));
+            }
+            else if(elementTag.compareToIgnoreCase("year") ==0){
+                publication.setYear(new String(ch, start, length));
+            }
+            else if(elementTag.compareToIgnoreCase("author")==0){
+                author = new Author(new String(ch, start, length));
+                authorList.add(author);
+            }
+            else if(elementTag.compareToIgnoreCase("school")==0){
+                ((Phdthesis)publication).setSchool(new String(ch, start, length));
+            }
+            else if(elementTag.compareToIgnoreCase("note")==0){
+                ((Phdthesis)Publication).setNote(new String(ch, start, length));
+            }
+        }
     }
 
     // calls by the parser whenever '>' end tag is found in xml 
@@ -242,6 +311,18 @@ public ArrayList<Authored> getXml(){
     		authored.setPublication(publication);
     		authoredList.add(authored);
     	}
+        else if(qName.compareToIgnoreCase("proceedings")==0){
+            proceedingsTag = false;
+            authored.setAuthorList(authorList);
+            authored.setPublication(publication);
+            authoredList.add(authored);
+        }
+        else if(qName.compareToIgnoreCase("phdthesis")==0){
+            phdthesisTag = false;
+            authored.setAuthorList(authorList);
+            authored.setPublication(publication);
+            authoredList.add(authored);
+        }
     }
     
     public void endDocument() throws SAXException{
@@ -252,6 +333,8 @@ public ArrayList<Authored> getXml(){
 //    	writeToCSV.writeToBook();
 //    	writeToCSV.writeToIncollection();
 //    	writeToCSV.writeToInproceedings();
+        // writeToCSV.writeToProceedings();
+        // writeToCSV.writeToPhdthesis();
     	writeToCSV.writeToAuthor();
     	writeToCSV.writeToAuthored();
     }
