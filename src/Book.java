@@ -1,31 +1,40 @@
 package main;
 
 public class Book extends Publication {
+	private String booktitle;
+	private String series;
 	private String publisher;
-	private String ISBN;
+	
+	public Book(){
+		super();
+	}
+	
+	public String getBooktitle() {
+		return this.booktitle;
+	}
+
+	public void setBooktitle(String booktitle) {
+		this.booktitle = booktitle;
+	}
+	
+	public String getSeries() {
+		return this.series;
+	}
+
+	public void setSeries(String series) {
+		this.series = series;
+	}
 	
 	public String getPublisher() {
-		return publisher;
+		return this.publisher;
 	}
 
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-
-	public String getISBN() {
-		return ISBN;
-	}
-
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
-	}
-
-	public Book(){
-		super();
-	}
 	
 	public String toString(){
-		return this.getPubKey()+this.getTitle()+this.getYear()+this.getPublisher()+this.getISBN();
+		return this.getPubId()+this.getPubKey()+this.getTitle()+this.getYear()+this.getBooktitle()+this.getSeries()+this.getPublisher();
 	}
 	
 }
