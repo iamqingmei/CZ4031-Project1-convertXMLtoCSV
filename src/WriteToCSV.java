@@ -177,7 +177,7 @@ public class WriteToCSV {
 			publication = this.authoredList.get(i).getPublication();
 			if(publication instanceof Inproceedings){
 				try {
-					fileWriter.append(publication.getPubID()+",");
+					fileWriter.append(publication.getPubId()+",");
 					fileWriter.append(hasComma(((Inproceedings) publication).getBookTitle())+",");
 					fileWriter.append(hasComma(((Inproceedings) publication).getEditor()));
 					fileWriter.append("\r\n");

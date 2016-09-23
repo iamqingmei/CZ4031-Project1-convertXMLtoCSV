@@ -48,10 +48,10 @@ public ArrayList<Authored> getXml(){
 	  boolean authorTag = false;
 	  
 	  //book
-	  boolean booktitleTag = false;
 	  boolean bookTag = false;
+	  boolean booktitleTag = false;
 	  boolean publisherTag = false;
-	  boolean ISBNTag = false;
+	  boolean seriesTag = false;
 	  
 	  //inproceedings
 	  boolean inproceedingsTag = false;
@@ -59,7 +59,10 @@ public ArrayList<Authored> getXml(){
 	  
 	  //incollection
 	  boolean incollectionTag = false;
-	  boolean titleTag = false;
+	  boolean bookTitleTag = false;
+	  boolean pagesTag = false;
+	  boolean crossRefTag = false;
+	  
 	  
 	  //publication
 	  boolean yearTag = false;
@@ -98,7 +101,7 @@ public ArrayList<Authored> getXml(){
     		authored = new Authored();
     		authorList = new ArrayList<Author>();
     		publication = new Incollection();
-    		publication.setPubID(generatePublicationID());
+    		publication.setPubId(generatePublicationID());
     		publication.setPubKey(attributes.getValue("key"));
     		incollectionTag = true;
     	}
@@ -129,7 +132,10 @@ public ArrayList<Authored> getXml(){
     		else if(elementTag.compareToIgnoreCase("publisher")==0){
     			((Book)publication).setPublisher(new String(ch, start, length));
     		}
-    		else if(elementTag.compareToIgnoreCase("isbn")==0){
+    		else if(elementTag.compareToIgnoreCase("series")==0){
+    			((Book)publication).setISBN(new String(ch, start, length));
+    		}
+			else if(elementTag.compareToIgnoreCase("booktitle")==0){
     			((Book)publication).setISBN(new String(ch, start, length));
     		}
     	}
@@ -190,10 +196,10 @@ public ArrayList<Authored> getXml(){
     		else if(elementTag.compareToIgnoreCase("booktitle")==0){
     			((Incollection)publication).setBookTitle(new String(ch, start, length));
     		}
-    		else if(elementTag.compareToIgnoreCase("publisher")==0){
+    		else if(elementTag.compareToIgnoreCase("pages")==0){
     			((Incollection)publication).setPublisher(new String(ch, start, length));
     		}
-    		else if(elementTag.compareToIgnoreCase("isbn")==0){
+    		else if(elementTag.compareToIgnoreCase("booktitle")==0){
     			((Incollection)publication).setISBN(new String(ch, start, length));
     		}
     	}
