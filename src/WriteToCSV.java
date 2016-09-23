@@ -1,5 +1,5 @@
 package main;
-/test
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -158,8 +158,8 @@ public class WriteToCSV {
 				try {
 					fileWriter.append(publication.getPubID()+",");
 					fileWriter.append(hasComma(((Incollection) publication).getBookTitle())+",");
-					fileWriter.append(hasComma(((Incollection) publication).getPublisher())+",");
-					fileWriter.append(hasComma(((Incollection) publication).getISBN()));
+					fileWriter.append(hasComma(((Incollection) publication).getPages())+",");
+					fileWriter.append(hasComma(((Incollection) publication).getcrossRef()));
 					fileWriter.append("\r\n");
 				} catch (IOException e) {
 					System.out.println("Error at incollection:"+e+","+publication.getPubID());
