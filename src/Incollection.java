@@ -2,37 +2,37 @@ package main;
 
 public class Incollection extends Publication {
 	private String bookTitle;
-	private String publisher;
-	private String ISBN;
+	private String pages;
+	private String crossRef;
 	
 	public Incollection(){
 		super();
 	}
 
 	public String getBookTitle() {
-		return bookTitle;
+		return booktitle;
 	}
 
-	public void setBookTitle(String bookTitle) {
-		this.bookTitle = bookTitle;
+	public void setBooktitle(String booktitle) {
+		this.booktitle = booktitle;
 	}
 
-	public String getPublisher() {
-		return publisher;
+	public String getPages() {
+		return pages;
 	}
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+	public void setPages(String pages) {
+		this.pages = pages;
 	}
 
-	public String getISBN() {
-		return ISBN;
+	public String getcrossRef() {
+		return crossRef;
 	}
 
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setcrossRef(String crossRef) {
+		this.crossRef = crossRef;;
 	}
 	public String toString(){
-		return this.getPubKey()+this.getTitle()+this.getYear()+this.getBookTitle()+this.getPublisher()+this.getISBN();
+		return this.getPubKey()+this.getTitle()+this.getYear()+this.getBooktitle()+this.getPages()+this.getcrossRef();
 	}
 }

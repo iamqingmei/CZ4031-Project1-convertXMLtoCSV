@@ -2,9 +2,9 @@ package main;
 
 public class Article extends Publication {
 	private String journal;
-	private String month;
+	private String pages;
 	private String volume;
-	private String number;
+	
 	
 	public Article(){
 		super();
@@ -18,14 +18,15 @@ public class Article extends Publication {
 		this.journal = journal;
 	}
 
-	public String getMonth() {
-		return month;
+	public String getPages() {
+		return pages;
 	}
 
-	public void setMonth(String month) {
-		this.month = month;
+	public void setPages(String pages) {
+		this.pages = pages;
 	}
 
+	
 	public String getVolume() {
 		return volume;
 	}
@@ -34,15 +35,9 @@ public class Article extends Publication {
 		this.volume = volume;
 	}
 
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
+	
 	
 	public String toString(){
-		return this.getPubKey()+this.getTitle()+this.getYear()+this.getJournal()+this.getMonth()+this.getVolume()+this.getNumber();
+		return this.getPubId()+this.getPubKey()+this.getTitle()+this.getYear()+this.getJournal()+this.getPages()+this.getVolume();
 	}
 }

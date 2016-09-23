@@ -1,28 +1,40 @@
 package main;
 
 public class Inproceedings extends Publication {
-	private String bookTitle;
-	private String editor;
+	private String booktitle;
+	private String pages;
+	private String crossref;
 	
 	public Inproceedings(){
 		super();
 	}
 
-	public String getBookTitle() {
-		return bookTitle;
+	public String getBooktitle() {
+		return booktitle;
 	}
 
-	public void setBookTitle(String bookTitle) {
-		this.bookTitle = bookTitle;
+	public void setBooktitle(String booktitle) {
+		this.booktitle = booktitle;
 	}
 
-	public String getEditor() {
-		return editor;
+	public String getPages() {
+		return pages;
 	}
 
-	public void setEditor(String editor) {
-		this.editor = editor;
+	public void setPages(String pages) {
+		this.pages = pages;
 	}
 	
+	public String getCrossRef() {
+		return crossref;
+	}
+
+	public void setCrossRef(String crossref) {
+		this.crossref = crossref;
+	}
+	
+	public String toString(){
+		return this.getPubId()+this.getPubKey()+this.getTitle()+this.getYear()+this.getBooktitle()+this.getPages()+this.getCrossRef();
+	}
 	
 }
