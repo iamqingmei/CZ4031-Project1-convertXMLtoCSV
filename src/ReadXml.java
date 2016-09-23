@@ -348,13 +348,13 @@ public ArrayList<Authored> getXml(){
     public void endDocument() throws SAXException{
     	System.out.println("AuthoredList size: "+authoredList.size());
     	writeToCSV = new WriteToCSV(authoredList);
-//    	writeToCSV.writeToPublication();
-//    	writeToCSV.writeToArticle();
-//    	writeToCSV.writeToBook();
-//    	writeToCSV.writeToIncollection();
-//    	writeToCSV.writeToInproceedings();
-        // writeToCSV.writeToProceedings();
-        // writeToCSV.writeToPhdthesis();
+    	// writeToCSV.writeToPublication();
+    	// writeToCSV.writeToArticle();
+    	// writeToCSV.writeToBook();
+    	// writeToCSV.writeToIncollection();
+    	// writeToCSV.writeToInproceedings();
+     //     writeToCSV.writeToProceedings();
+     //     writeToCSV.writeToPhdthesis();
     	writeToCSV.writeToAuthor();
     	writeToCSV.writeToAuthored();
     }

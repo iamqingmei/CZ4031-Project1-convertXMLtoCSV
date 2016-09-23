@@ -46,6 +46,7 @@ public class WriteToCSV {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
+				System.out.println(e);
 				System.out.println("Cannot create file :"+path);
 			}
 		}
@@ -236,7 +237,7 @@ public class WriteToCSV {
 	public void writeToAuthor(){
 		//HashSet hs = new HashSet();
 		
-		ArrayList<Author> authorList;
+		ArrayList<Author> authorList = new ArrayList<Author>();
 		HashSet<String> set;
 		ArrayList<String> authorStringArray = new ArrayList<String>();
 		Author author;
@@ -258,29 +259,31 @@ public class WriteToCSV {
 			author = new Author(getAuthorId(),authorStringArray.get(i));
 			this.authorList.add(author);
 		}
-//		authorStringArray = null;
-//		authorList = null;
-//		//write into author file
-//		getFile(authorPath);//open author file
-//		for(int i=0;i<this.authorList.size();i++){
-//			author = this.authorList.get(i);
-//			try {
-//				fileWriter.append(author.getAuthorID()+",");
-//				fileWriter.append(hasComma(author.getAuthorName()));
-//				fileWriter.append("\r\n");
-//			} catch (IOException e) {
-//				System.out.println("Error at author:"+e+","+author.getAuthorID());
-//				System.exit(0);
-//			}
-//		}
-//		cleanUP("author done");
+		authorStringArray = null;
+
+		//write into author file
+		getFile(authorPath);//open author file
+		System.out.println("author?: "+ authorList.size());
+		for(int i=0;i<this.authorList.size();i++){
+			System.out.println("here?");
+			author = this.authorList.get(i);
+			try {
+				fileWriter.append(author.getAuthorID()+",");
+				fileWriter.append(hasComma(author.getAuthorName()));
+				fileWriter.append("\r\n");
+			} catch (IOException e) {
+				System.out.println("Error at author:"+e+","+author.getAuthorID());
+				System.exit(0);
+			}
+		}
+		cleanUP("author done");
 	}
 	
 	public void writeToAuthored(){
 		Author author;
 		Authored authored;
 		Publication publication;
-		HashSet set;
+		HashSet<String> set;
 		ArrayList<Author> authorList;
 		ArrayList<String> authoredString = new ArrayList<String>();
 		long authorID;
@@ -293,7 +296,9 @@ public class WriteToCSV {
 			author = this.authorList.get(i);
 			splitHash(author);
 		}
+		
 		getFile(authoredPath);
+		
 		for(int i=0;i<authoredList.size();i++){
 			authored = authoredList.get(i);
 			publication = authored.getPublication();
@@ -306,12 +311,16 @@ public class WriteToCSV {
 				}
 			}
 		}
-		set = new HashSet<String>(authoredString);
-		authoredString = new ArrayList<String>(set);
-		set = new HashSet<String>(authoredString);
-		authoredString = new ArrayList<String>(set);
+//		set = new HashSet<String>(authoredString);
+//		authoredString = new ArrayList<String>(set);
+//		set = new HashSet<String>(authoredString);
+//		authoredString = new ArrayList<String>(set);
+//		System.out.println("3????");
+//		System.out.println("what?!: " + authoredString.size());
 		for(int i=0;i<authoredString.size();i++){
 			try{
+//				System.out.println("here????");
+//				System.out.println("authored: " + authoredString.get(i));
 				fileWriter.append(authoredString.get(i));
 				fileWriter.append("\r\n");
 			}
