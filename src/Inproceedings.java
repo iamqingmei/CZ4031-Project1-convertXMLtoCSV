@@ -1,4 +1,4 @@
-package main;
+
 
 public class Inproceedings extends Publication {
 	private String booktitle;

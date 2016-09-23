@@ -1,12 +1,11 @@
-package main;
 
-public class Article extends Publication {
+public class Phdthesis extends Publication {
 	private String school;
 	private String note;
 	
 	
 	
-	public Article(){
+	public Phdthesis(){
 		super();
 	}
 
@@ -22,14 +21,11 @@ public class Article extends Publication {
 		return note;
 	}
 
-	public void setNoteString note) {
+	public void setNote(String note) {
 		this.note = note;
 	}
 
-	
-	
-	
-	
+
 	public String toString(){
 		return this.getPubId()+this.getPubKey()+this.getTitle()+this.getYear()+this.getSchool()+this.getNote();
 	}

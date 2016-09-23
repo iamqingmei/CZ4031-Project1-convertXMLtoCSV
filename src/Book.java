@@ -1,4 +1,4 @@
-package main;
+
 
 public class Book extends Publication {
 	private String booktitle;

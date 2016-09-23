@@ -1,4 +1,4 @@
-package main;
+
 
 public class Article extends Publication {
 	private String journal;

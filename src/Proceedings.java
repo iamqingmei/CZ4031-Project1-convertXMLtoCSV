@@ -1,11 +1,11 @@
-package main;
+
 
 public class Proceedings extends Publication {
 	private String isbn;
 	private String booktitle;
-	private String pulisher;
+	private String publisher;
 
-	public Proceeedings(){
+	public Proceedings(){
 		super();
 	}
 

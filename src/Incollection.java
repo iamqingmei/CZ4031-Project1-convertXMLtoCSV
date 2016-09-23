@@ -1,7 +1,7 @@
-package main;
+
 
 public class Incollection extends Publication {
-	private String bookTitle;
+	private String booktitle;
 	private String pages;
 	private String crossRef;
 	
@@ -33,6 +33,6 @@ public class Incollection extends Publication {
 		this.crossRef = crossRef;;
 	}
 	public String toString(){
-		return this.getPubKey()+this.getTitle()+this.getYear()+this.getBooktitle()+this.getPages()+this.getcrossRef();
+		return this.getPubKey()+this.getTitle()+this.getYear()+this.getBookTitle()+this.getPages()+this.getcrossRef();
 	}
 }

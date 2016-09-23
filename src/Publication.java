@@ -1,4 +1,4 @@
-package main;
+
 
 public class Publication {
 	private long pubId;
@@ -41,7 +41,7 @@ public class Publication {
 	}
 
 	public String toString(){
-		return this.pubId.toString()+ this.pubKey+this.title+this.year.toString();
+		return this.pubId+ this.pubKey+this.title+this.year;
 	}
 
 }

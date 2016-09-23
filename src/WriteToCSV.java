@@ -138,7 +138,7 @@ public class WriteToCSV {
 				try {
 					fileWriter.append(publication.getPubId()+",");
 					fileWriter.append(hasComma(((Article) publication).getJournal())+",");
-					fileWriter.append(hasComma(((Article) publication).getPages))+",");
+					fileWriter.append(hasComma(((Article) publication).getPages())+",");
 					fileWriter.append(hasComma(((Article) publication).getVolume())+",");
 					
 					fileWriter.append("\r\n");
@@ -152,19 +152,19 @@ public class WriteToCSV {
 	}
 
 	public void writeToProceedings(){
-		Proceedings proceedings;
+		Publication publication;
 		getFile(proceedingsPath);
 		for (int i=0;i<this.authoredList.size();i++){
-			proceedings = this.authoredList.get(i).getProceedings();
-			if (proceedings instanceof Proceedings){
+			publication = this.authoredList.get(i).getPublication();
+			if (publication instanceof Proceedings){
 				try{
-					fileWriter.append(proceedings.getPubId()+",");
-					fileWriter.append(hasComma(((Proceedings) publication).getISBN()) + ",");
+					fileWriter.append(publication.getPubId()+",");
+					fileWriter.append(hasComma(((Proceedings) publication).getIsbn()) + ",");
 					fileWriter.append(hasComma(((Proceedings) publication).getBooktitle()) + ",");
 					fileWriter.append(hasComma(((Proceedings) publication).getPublisher()));
 					fileWriter.append("\r\n");
 				} catch (IOException e){
-					System.out.println("Error at Proceedings: " + e +","+proceedings.getPubId());
+					System.out.println("Error at Proceedings: " + e +","+publication.getPubId());
 					System.exit(0);
 				}
 			}
@@ -173,18 +173,18 @@ public class WriteToCSV {
 	}
 
 	public void writeToPhdthesis(){
-		Phdthesis phdthesis;
+		Publication publication;
 		getFile(phdthesisPath);
 		for (int i=0;i<this.authoredList.size();i++){
-			phdthesis = this.authoredList.get(i).getPhdthesis();
-			if (phdthesis instanceof Phdthesis){
+			publication = this.authoredList.get(i).getPublication();
+			if (publication instanceof Phdthesis){
 				try{
-					fileWriter.append(phdthesis.getPubId()+",");
+					fileWriter.append(publication.getPubId()+",");
 					fileWriter.append(hasComma(((Phdthesis) publication).getSchool()) + ",");
 					fileWriter.append(hasComma(((Phdthesis) publication).getNote()));
 					fileWriter.append("\r\n");
 				} catch (IOException e){
-					System.out.println("Error at Phdthesis:" + e +","+phdthesis.getPubId());
+					System.out.println("Error at Phdthesis:" + e +","+publication.getPubId());
 					System.exit(0);
 				}
 			}
@@ -199,13 +199,13 @@ public class WriteToCSV {
 			publication = this.authoredList.get(i).getPublication();
 			if(publication instanceof Incollection){
 				try {
-					fileWriter.append(publication.getPubID()+",");
+					fileWriter.append(publication.getPubId()+",");
 					fileWriter.append(hasComma(((Incollection) publication).getBookTitle())+",");
 					fileWriter.append(hasComma(((Incollection) publication).getPages())+",");
 					fileWriter.append(hasComma(((Incollection) publication).getcrossRef()));
 					fileWriter.append("\r\n");
 				} catch (IOException e) {
-					System.out.println("Error at incollection:"+e+","+publication.getPubID());
+					System.out.println("Error at incollection:"+e+","+publication.getPubId());
 					System.exit(0);
 				}
 		}
@@ -255,7 +255,7 @@ public class WriteToCSV {
 
 //		//write into authorList
 		for(int i=0;i<authorStringArray.size();i++){
-			author = new Author(getAuthorID(),authorStringArray.get(i));
+			author = new Author(getAuthorId(),authorStringArray.get(i));
 			this.authorList.add(author);
 		}
 //		authorStringArray = null;
@@ -302,7 +302,7 @@ public class WriteToCSV {
 				author = authorList.get(j);
 				authorID = getHash(author);
 				if(authorID > 0){
-					authoredString.add(authorID+","+publication.getPubID());
+					authoredString.add(authorID+","+publication.getPubId());
 				}
 			}
 		}
