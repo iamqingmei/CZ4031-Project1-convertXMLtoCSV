@@ -18,13 +18,13 @@ public class ReadXml extends DefaultHandler{
 	private Author author;
 	private Authored authored;
 	private ArrayList<Authored> authoredList;
-	private int pubID,authorID;
+	private int pubId,authorID;
 	private ArrayList<Author> authorList;
 	private WriteToCSV writeToCSV;
 public ArrayList<Authored> getXml(){
   try {
 	  authoredList = new ArrayList<Authored>();
-	  pubID = 0;
+	  pubId = 0;
 	  authorID = 0;
 	  
 	  // obtain and configure a SAX based parser
@@ -40,12 +40,14 @@ public ArrayList<Authored> getXml(){
 	  //article
 	  boolean articleTag = false;
 	  boolean journalTag = false;
-	  boolean monthTag = false;
+	  boolean pagesTag = false;
 	  boolean volumeTag = false;
-	  boolean numberTag = false;
+	 
 	  
 	  //author
 	  boolean authorTag = false;
+	  boolean nameTag = false;
+	  boolean authorIdTag = false;
 	  
 	  //book
 	  boolean bookTag = false;
@@ -55,7 +57,10 @@ public ArrayList<Authored> getXml(){
 	  
 	  //inproceedings
 	  boolean inproceedingsTag = false;
-	  boolean editorTag = false;
+	  boolean booktitleTag = false;
+	  boolean pagesTag = false;
+	  boolean crossRefTag = false;
+	  
 	  
 	  //incollection
 	  boolean incollectionTag = false;
@@ -66,6 +71,9 @@ public ArrayList<Authored> getXml(){
 	  
 	  //publication
 	  boolean yearTag = false;
+	  boolean titleTag = false;
+	  boolean pubKeyTag = false;
+	  boolean pubIdTag = false;
 	  
 	  String elementTag = "";
 	  
@@ -86,7 +94,7 @@ public ArrayList<Authored> getXml(){
     		authored = new Authored();
     		authorList = new ArrayList<Author>();
     		publication = new Article();
-    		publication.setPubID(generatePublicationID());
+    		publication.setPubId(generatePublicationId());
     		publication.setPubKey(attributes.getValue("key"));
     	}
     	else if(qName.compareToIgnoreCase("inproceedings")==0){
@@ -94,14 +102,14 @@ public ArrayList<Authored> getXml(){
     		authored = new Authored();
     		authorList = new ArrayList<Author>();
     		publication = new Inproceedings();
-    		publication.setPubID(generatePublicationID());
+    		publication.setPubId(generatePublicationId());
     		publication.setPubKey(attributes.getValue("key"));
     	}
     	else if(qName.compareToIgnoreCase("incollection")==0){
     		authored = new Authored();
     		authorList = new ArrayList<Author>();
     		publication = new Incollection();
-    		publication.setPubId(generatePublicationID());
+    		publication.setPubId(generatePublicationId());
     		publication.setPubKey(attributes.getValue("key"));
     		incollectionTag = true;
     	}
@@ -110,8 +118,8 @@ public ArrayList<Authored> getXml(){
     	//System.out.println(qName);
     }
 
-    public int generatePublicationID(){
-    	return ++pubID;
+    public int generatePublicationId(){
+    	return ++pubId;
     }
     public int generateAuthorID(){
     	return ++authorID;
@@ -153,15 +161,13 @@ public ArrayList<Authored> getXml(){
     		else if(elementTag.compareToIgnoreCase("journal")==0){
     			((Article)publication).setJournal(new String(ch, start, length));
     		}
-    		else if(elementTag.compareToIgnoreCase("month")==0){
-    			((Article)publication).setMonth(new String(ch, start, length));
+    		else if(elementTag.compareToIgnoreCase("pages")==0){
+    			((Article)publication).setPages(new String(ch, start, length));
     		}
     		else if(elementTag.compareToIgnoreCase("volume")==0){
     			((Article)publication).setVolume(new String(ch, start, length));
     		}
-    		else if(elementTag.compareToIgnoreCase("number")==0){
-    			((Article)publication).setNumber(new String(ch, start, length));
-    		}
+    		
     		
     	}
     	else if(inproceedingsTag){
@@ -178,8 +184,11 @@ public ArrayList<Authored> getXml(){
     		else if(elementTag.compareToIgnoreCase("booktitle")==0){
     			((Inproceedings)publication).setBookTitle(new String(ch, start, length));
     		}
-    		else if(elementTag.compareToIgnoreCase("editor")==0){
-    			((Inproceedings)publication).setEditor(new String(ch, start, length));
+    		else if(elementTag.compareToIgnoreCase("pages")==0){
+    			((Inproceedings)publication).setPages(new String(ch, start, length));
+    		}
+			else if(elementTag.compareToIgnoreCase("crossref")==0){
+    			((Inproceedings)publication).setCrossRef(new String(ch, start, length));
     		}
     	}
     	else if(incollectionTag){

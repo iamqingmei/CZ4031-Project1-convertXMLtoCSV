@@ -6,12 +6,12 @@ public class Publication {
 	private String title;
 	private long year;
 
-	public long getPubID() {
+	public long getPubId() {
 		return this.pubId;
 	}
 
-	public void setPubId(long pubID) {
-		this.pubId = pubID;
+	public void setPubId(long pubId) {
+		this.pubId = pubId;
 	}
 
 	public Publication(){}
@@ -41,7 +41,7 @@ public class Publication {
 	}
 
 	public String toString(){
-		return this.pubID.toString()+ this.pubKey+this.title+this.year.toString();
+		return this.pubId.toString()+ this.pubKey+this.title+this.year.toString();
 	}
 
 }
