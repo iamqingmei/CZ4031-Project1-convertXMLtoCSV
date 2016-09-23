@@ -22,8 +22,10 @@ public class WriteToCSV {
 	private final String bookPath = "Book";
 	private final String incollectionPath = "Incollection";
 	private final String inproceedingsPath = "Inproceedings";
+	private final String proceedingsPath = "Proceedings";
 	private final String publicationPath = "Publication";
 	private final String authoredPath = "Authored";
+	private final String phdthesisPath = "Phdthesis";
 	
 	public WriteToCSV(ArrayList<Authored> authoredList){
 		this.authoredList = authoredList;
@@ -148,6 +150,47 @@ public class WriteToCSV {
 		}
 		}
 		cleanUP("article done");
+	}
+
+	public void writeToProceedings(){
+		Proceedings proceedings;
+		getFile(proceedingsPath);
+		for (int i=0;i<this.authoredList.size();i++){
+			proceedings = this.authoredList.get(i).getProceedings();
+			if (proceedings instanceof Proceedings){
+				try{
+					fileWriter.append(proceedings.getPubId()+",");
+					fileWriter.append(hasComma(((Proceedings) publication).getISBN()) + ",");
+					fileWriter.append(hasComma(((Proceedings) publication).getBooktitle()) + ",");
+					fileWriter.append(hasComma(((Proceedings) publication).getPublisher()));
+					fileWriter.append("\r\n");
+				} catch (IOException e){
+					System.out.println("Error at Proceedings: " + e +","+proceedings.getPubId());
+					System.exit(0);
+				}
+			}
+		}
+		cleanUP("proceedings done");
+	}
+
+	public void writeToPhdthesis(){
+		Phdthesis phdthesis;
+		getFile(phdthesisPath);
+		for (int i=0;i<this.authoredList.size();i++){
+			phdthesis = this.authoredList.get(i).getPhdthesis();
+			if (phdthesis instanceof Phdthesis){
+				try{
+					fileWriter.append(phdthesis.getPubId()+",");
+					fileWriter.append(hasComma(((Phdthesis) publication).getSchool()) + ",");
+					fileWriter.append(hasComma(((Phdthesis) publication).getNote()));
+					fileWriter.append("\r\n");
+				} catch (IOException e){
+					System.out.println("Error at Phdthesis:" + e +","+phdthesis.getPubId());
+					System.exit(0);
+				}
+			}
+		}
+		cleanUP("Phdthesis done");
 	}
 	
 	public void writeToIncollection(){
