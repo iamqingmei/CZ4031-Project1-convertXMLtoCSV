@@ -72,6 +72,15 @@ public ArrayList<Authored> getXml(){
 	  boolean pubKeyTag = false;
 	  boolean pubIdTag = false;
 	  
+	  boolean proceedingsTag=false;
+	  boolean isbnTag=false;
+	  boolean booktitle=false;
+	  boolean proceedingsTag=false;
+	  
+	  boolean phdThesisTag=false;
+	  boolean schoolTag=false;
+	  boolean notesTag=false;
+	  
 	  String elementTag = "";
 	  
     // this method is called every time the parser gets an open tag '<'
@@ -83,7 +92,7 @@ public ArrayList<Authored> getXml(){
     		authored = new Authored();
     		authorList = new ArrayList<Author>();
     		publication = new Book();
-    		publication.setPubID(generatePublicationID());
+    		publication.setPubId(generatePublicationID());
     		publication.setPubKey(attributes.getValue("key"));
     	}
     	else if(qName.compareToIgnoreCase("article")==0){
@@ -102,6 +111,14 @@ public ArrayList<Authored> getXml(){
     		publication.setPubId(generatePublicationId());
     		publication.setPubKey(attributes.getValue("key"));
     	}
+		else if(qName.compareToIgnoreCase("proceedings")==0){
+    		proceedingsTag = true;
+    		authored = new Authored();
+    		authorList = new ArrayList<Author>();
+    		publication = new Proceedings();
+    		publication.setPubId(generatePublicationId());
+    		publication.setPubKey(attributes.getValue("key"));
+    	}
     	else if(qName.compareToIgnoreCase("incollection")==0){
     		authored = new Authored();
     		authorList = new ArrayList<Author>();
@@ -109,6 +126,15 @@ public ArrayList<Authored> getXml(){
     		publication.setPubId(generatePublicationId());
     		publication.setPubKey(attributes.getValue("key"));
     		incollectionTag = true;
+    	}
+		
+		else if(qName.compareToIgnoreCase("phdthesis")==0){
+    		authored = new Authored();
+    		authorList = new ArrayList<Author>();
+    		publication = new phdthesis();
+    		publication.setPubId(generatePublicationId());
+    		publication.setPubKey(attributes.getValue("key"));
+    		phdThesisTag = true;
     	}
     	
     	elementTag = qName;
@@ -230,7 +256,25 @@ public ArrayList<Authored> getXml(){
     		authored.setPublication(publication);
     		authoredList.add(authored);
     	}
+		else if(qName.compareToIgnoreCase("proceedings")==0){
+    		proceedingsTag = false;
+    		authored.setAuthorList(authorList);
+    		authored.setPublication(publication);
+    		authoredList.add(authored);
+    	}
     	else if(qName.compareToIgnoreCase("incollection")==0){
+    		incollectionTag = false;
+    		authored.setAuthorList(authorList);
+    		authored.setPublication(publication);
+    		authoredList.add(authored);
+    	}
+		else if(qName.compareToIgnoreCase("phdthesis")==0){
+    		phdThesisTag = false;
+    		authored.setAuthorList(authorList);
+    		authored.setPublication(publication);
+    		authoredList.add(authored);
+    	}
+			else if(qName.compareToIgnoreCase("proceedings")==0){
     		incollectionTag = false;
     		authored.setAuthorList(authorList);
     		authored.setPublication(publication);
