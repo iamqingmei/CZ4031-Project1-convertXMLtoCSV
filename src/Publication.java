@@ -1,22 +1,23 @@
 package main;
 
 public class Publication {
+	private long pubId;
 	private String pubKey;
 	private String title;
-	private String year;
-	private long pubID;
+	private long year;
+
 	public long getPubID() {
-		return pubID;
+		return this.pubId;
 	}
 
-	public void setPubID(long pubID) {
-		this.pubID = pubID;
+	public void setPubId(long pubID) {
+		this.pubId = pubID;
 	}
 
 	public Publication(){}
 
 	public String getPubKey() {
-		return pubKey;
+		return this.pubKey;
 	}
 
 	public void setPubKey(String pubKey) {
@@ -24,23 +25,23 @@ public class Publication {
 	}
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public String getYear() {
+	public long getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(long year) {
 		this.year = year;
 	}
 
 	public String toString(){
-		return this.pubKey+this.title+this.pubID+this.year;
+		return this.pubID.toString()+ this.pubKey+this.title+this.year.toString();
 	}
 
 }

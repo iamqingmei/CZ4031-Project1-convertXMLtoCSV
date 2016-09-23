@@ -11,7 +11,7 @@ public class Authored {
 	}
 
 	public ArrayList<Author> getAuthorList() {
-		return authorList;
+		return this.authorList;
 	}
 
 	public void setAuthorList(ArrayList<Author> authorList) {

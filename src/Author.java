@@ -1,34 +1,34 @@
 package main;
 
 public class Author {
-	private String authorName;
-	private long authorID;
+	private String name;
+	private long authorId;
 	public long getAuthorID() {
-		return authorID;
+		return this.authorId;
 	}
 
 	public void setAuthorID(long authorID) {
-		this.authorID = authorID;
+		this.authorId = authorID;
 	}
 
 	public Author(){
-		authorName = null;
+		name = null;
 	}
 	
-	public Author(String authorName){
-		this.authorName = authorName;
+	public Author(String name){
+		this.name = name;
 	}
-	public Author(long authorID,String authorName){
-		this.authorID = authorID;
-		this.authorName = authorName;
+	public Author(long authorID,String name){
+		this.authorId = authorID;
+		this.name = name;
 	}
 
 	public String getAuthorName() {
-		return authorName;
+		return this.name;
 	}
 
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
+	public void setAuthorName(String name) {
+		this.name = name;
 	}
 	
 }
