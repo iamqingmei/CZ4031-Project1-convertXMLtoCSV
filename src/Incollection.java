@@ -1,5 +1,3 @@
-
-
 public class Incollection extends Publication {
 	private String booktitle;
 	private String pages;

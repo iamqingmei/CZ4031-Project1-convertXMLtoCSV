@@ -1,5 +1,3 @@
-
-
 public class Inproceedings extends Publication {
 	private String booktitle;
 	private String pages;

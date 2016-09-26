@@ -1,6 +1,3 @@
-
-
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +8,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 
 public class ReadXml extends DefaultHandler{
 	private ArrayList<Author> AuthorList = new ArrayList<Author>();
@@ -348,13 +346,13 @@ public ArrayList<Authored> getXml(){
     public void endDocument() throws SAXException{
     	System.out.println("AuthoredList size: "+authoredList.size());
     	writeToCSV = new WriteToCSV(authoredList);
-    	// writeToCSV.writeToPublication();
-    	// writeToCSV.writeToArticle();
-    	// writeToCSV.writeToBook();
-    	// writeToCSV.writeToIncollection();
-    	// writeToCSV.writeToInproceedings();
-     //     writeToCSV.writeToProceedings();
-     //     writeToCSV.writeToPhdthesis();
+    	writeToCSV.writeToPublication();
+    	writeToCSV.writeToArticle();
+    	writeToCSV.writeToBook();
+    	writeToCSV.writeToIncollection();
+    	writeToCSV.writeToInproceedings();
+        writeToCSV.writeToProceedings();
+        writeToCSV.writeToPhdthesis();
     	writeToCSV.writeToAuthor();
     	writeToCSV.writeToAuthored();
     }
@@ -366,4 +364,3 @@ public ArrayList<Authored> getXml(){
   return authoredList;
  }
 }
-

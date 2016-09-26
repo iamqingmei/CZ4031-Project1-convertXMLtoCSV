@@ -1,5 +1,3 @@
-
-
 public class Article extends Publication {
 	private String journal;
 	private String pages;

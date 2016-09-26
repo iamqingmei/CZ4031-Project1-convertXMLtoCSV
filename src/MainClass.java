@@ -6,12 +6,12 @@ public class MainClass {
 		ReadXml readXml = new ReadXml();
 		readXml.getXml();
 		System.out.println("start!");
-//		Runtime.getRuntime().addShutdownHook(new Thread(){
-//			@Override
-//			public void run() {
-//				System.out.println("tio cut");
-//			}
-//		});
+		Runtime.getRuntime().addShutdownHook(new Thread(){
+			@Override
+			public void run() {
+				System.out.println("tio cut");
+			}
+		});
 		System.out.println("finished!");
 	}
 	

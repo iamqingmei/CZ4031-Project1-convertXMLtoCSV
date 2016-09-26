@@ -1,5 +1,3 @@
-
-
 public class Proceedings extends Publication {
 	private String isbn;
 	private String booktitle;

@@ -1,5 +1,3 @@
-
-
 public class Book extends Publication {
 	private String booktitle;
 	private String series;

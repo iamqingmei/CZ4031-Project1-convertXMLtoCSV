@@ -1,5 +1,3 @@
-
-
 public class Publication {
 	private long pubId;
 	private String pubKey;
@@ -45,3 +43,4 @@ public class Publication {
 	}
 
 }
+

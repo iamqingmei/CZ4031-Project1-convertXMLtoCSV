@@ -1,5 +1,3 @@
-
-
 public class Author {
 	private String name;
 	private long authorId;
