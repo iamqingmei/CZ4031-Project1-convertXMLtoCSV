@@ -4,7 +4,13 @@
 .DS_Store?
 MDPalgo/src/robot/.DS_Store
 
-.DS_Store
-.csv
-.xml
+*.DS_Store
+*.csv
+*.xml
 
+
+bin/xmlToRead/dblp.xml
+
+bin/xmlToRead/dblp.dtd
+
+*.dtd
