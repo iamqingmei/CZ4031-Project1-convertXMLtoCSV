@@ -221,7 +221,7 @@ public class WriteToCSV {
 				try {
 					fileWriter.append(publication.getPubId()+",");
 					fileWriter.append(hasComma(((Inproceedings) publication).getBooktitle())+",");
-					fileWriter.append(hasComma(((Inproceedings) publication).getPages()));
+					fileWriter.append(hasComma(((Inproceedings) publication).getPages())+",");
 					fileWriter.append(hasComma(((Inproceedings) publication).getCrossRef()));
 					fileWriter.append("\r\n");
 				} catch (IOException e) {
