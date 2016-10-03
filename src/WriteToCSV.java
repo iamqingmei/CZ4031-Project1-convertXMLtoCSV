@@ -179,8 +179,7 @@ public class WriteToCSV {
 			if (publication instanceof Phdthesis){
 				try{
 					fileWriter.append(publication.getPubId()+",");
-					fileWriter.append(hasComma(((Phdthesis) publication).getSchool()) + ",");
-					fileWriter.append(hasComma(((Phdthesis) publication).getNote()));
+					fileWriter.append(hasComma(((Phdthesis) publication).getSchool()));
 					fileWriter.append("\r\n");
 				} catch (IOException e){
 					System.out.println("Error at Phdthesis:" + e +","+publication.getPubId());
@@ -282,11 +281,11 @@ public class WriteToCSV {
 		ArrayList<Author> authorList;
 		ArrayList<String> authoredString = new ArrayList<String>();
 		long authorID;
-		//initalise hashtable
+//		initalise hashtable
 		for(int i=0;i<authorTable.length;i++){
 			authorTable[i] = new Hashtable();
 		}
-		//put author into respective hashtable
+//		put author into respective hashtable
 		for(int i=0;i<this.authorList.size();i++){
 			author = this.authorList.get(i);
 			splitHash(author);
@@ -320,7 +319,7 @@ public class WriteToCSV {
 		cleanUP("authored done");
 	}
 	
-	//split author based on the first character of the name
+//	split author based on the first character of the name
 		public int split(String authorName){
 			char a = authorName.charAt(0);
 			int b = (int)a-64;
@@ -336,10 +335,11 @@ public class WriteToCSV {
 			else{
 				return b;
 			}
+			
 		}
 		
 		//insert into hash table
-		@SuppressWarnings("unchecked")
+//		@SuppressWarnings("unchecked")
 		public void splitHash(Author author){
 			int value = split(author.getAuthorName());
 			authorTable[value].put(author.getAuthorName(), author.getAuthorID());

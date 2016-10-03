@@ -37,65 +37,30 @@ public ArrayList<Authored> getXml(){
     
 	  //article
 	  boolean articleTag = false;
-	  // boolean journalTag = false;
-	  // boolean pagesTag = false;
-	  // boolean volumeTag = false;
-	 
 	  
 	  //author
 	  boolean authorTag = false;
-	  // boolean nameTag = false;
 	  boolean authorIdTag = false;
 	  
 	  //book
 	  boolean bookTag = false;
-	  // boolean booktitleTag = false;
-	  // boolean publisherTag = false;
-	  // boolean seriesTag = false;
 	  
 	  //inproceedings
-	  boolean inproceedingsTag = false;
-	  // boolean inproceedingsBooktitleTag = false;
-	  // boolean pagesTag = false;
-	  // boolean crossRefTag = false;
-	  
+	  boolean inproceedingsTag = false;	  
 	  
 	  //incollection
-	  boolean incollectionTag = false;
-	  // boolean bookTitleTag = false;
-	  // boolean pagesTag = false;
-	  // boolean crossRefTag = false;
-	  
+	  boolean incollectionTag = false;  
 	  
 	  //publication
 	  boolean yearTag = false;
 
-
       //proceedings
       boolean proceedingsTag = false;
-      // boolean proceedingsISBNTag = false;
-      // boolean proceedingsPublisherTag = false;
-      // boolean proceedingsBookTitleTag = false;
+
 
       //phdthesis
       boolean phdthesisTag = false;
-   //    boolean phdthesisSchool = false;
-   //    boolean phdthesisNote = false;
 
-	  // boolean titleTag = false;
-	  // boolean pubKeyTag = false;
-	  // boolean pubIdTag = false;
-
-	  
-	  // boolean proceedingsTag=false;
-	  // boolean isbnTag=false;
-	  // boolean booktitle=false;
-	  // boolean proceedingsTag=false;
-	  
-	  // boolean phdThesisTag=false;
-	  // boolean schoolTag=false;
-	  // boolean notesTag=false;
-	  
 	  String elementTag = "";
 	  
     // this method is called every time the parser gets an open tag '<'
@@ -206,9 +171,7 @@ public ArrayList<Authored> getXml(){
     		}
     		else if(elementTag.compareToIgnoreCase("volume")==0){
     			((Article)publication).setVolume(new String(ch, start, length));
-    		}
-    		
-    		
+    		}    		
     	}
     	else if(inproceedingsTag){
     		if(elementTag.compareToIgnoreCase("title")==0){
@@ -287,9 +250,6 @@ public ArrayList<Authored> getXml(){
             else if(elementTag.compareToIgnoreCase("school")==0){
                 ((Phdthesis)publication).setSchool(new String(ch, start, length));
             }
-            else if(elementTag.compareToIgnoreCase("note")==0){
-                ((Phdthesis)publication).setNote(new String(ch, start, length));
-            }
         }
     }
 
@@ -327,13 +287,6 @@ public ArrayList<Authored> getXml(){
     		authored.setPublication(publication);
     		authoredList.add(authored);
     	}
-
-        else if(qName.compareToIgnoreCase("proceedings")==0){
-            proceedingsTag = false;
-            authored.setAuthorList(authorList);
-            authored.setPublication(publication);
-            authoredList.add(authored);
-        }
         else if(qName.compareToIgnoreCase("phdthesis")==0){
             phdthesisTag = false;
             authored.setAuthorList(authorList);
@@ -356,7 +309,7 @@ public ArrayList<Authored> getXml(){
     	writeToCSV.writeToAuthor();
     	writeToCSV.writeToAuthored();
     }
-   };
+};
    saxParser.parse("xmlToRead/dblp.xml", defaultHandler);
   } catch (Exception e) {
    e.printStackTrace();
