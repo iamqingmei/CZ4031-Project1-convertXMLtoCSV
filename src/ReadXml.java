@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -19,6 +20,7 @@ public class ReadXml extends DefaultHandler{
 	private int pubId,authorID;
 	private ArrayList<Author> authorList;
 	private WriteToCSV writeToCSV;
+	private String tempStr; 
 public ArrayList<Authored> getXml(){
   try {
 	  authoredList = new ArrayList<Authored>();
@@ -38,9 +40,8 @@ public ArrayList<Authored> getXml(){
 	  //article
 	  boolean articleTag = false;
 	  
-	  //author
+	  //to handle the & in author name
 	  boolean authorTag = false;
-	  boolean authorIdTag = false;
 	  
 	  //book
 	  boolean bookTag = false;
@@ -50,13 +51,9 @@ public ArrayList<Authored> getXml(){
 	  
 	  //incollection
 	  boolean incollectionTag = false;  
-	  
-	  //publication
-	  boolean yearTag = false;
 
       //proceedings
       boolean proceedingsTag = false;
-
 
       //phdthesis
       boolean phdthesisTag = false;
@@ -67,6 +64,7 @@ public ArrayList<Authored> getXml(){
     // identifies which tag is being open at time by assigning an open flag
     public void startElement(String uri, String localName, String qName,
       Attributes attributes) throws SAXException {
+    	tempStr = "";
     	if(qName.compareToIgnoreCase("book") == 0){
     		bookTag = true;
     		authored = new Authored();
@@ -116,11 +114,7 @@ public ArrayList<Authored> getXml(){
     		publication.setPubKey(attributes.getValue("key"));
     		phdthesisTag = true;
     	}
-
-       
-    	
     	elementTag = qName;
-    	//System.out.println(qName);
     }
 
     public int generatePublicationId(){
@@ -131,124 +125,119 @@ public ArrayList<Authored> getXml(){
     }
     // prints data stored in between '<' and '>' tags
     public void characters(char ch[], int start, int length) throws SAXException {
+    	tempStr += new String(ch, start, length);
     	if(bookTag){
     		if(elementTag.compareToIgnoreCase("title")==0){
-    			publication.setTitle(new String(ch, start, length));
+    			publication.setTitle(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("year")==0){
-    			publication.setYear(new String(ch, start, length));
+    			publication.setYear(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("author")==0){
-    			author = new Author(new String(ch, start, length));
-    			authorList.add(author);
+    			authorTag = true;
     		}
     		else if(elementTag.compareToIgnoreCase("publisher")==0){
-    			((Book)publication).setPublisher(new String(ch, start, length));
+    			((Book)publication).setPublisher(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("series")==0){
-    			((Book)publication).setSeries(new String(ch, start, length));
+    			((Book)publication).setSeries(tempStr);
     		}
 			else if(elementTag.compareToIgnoreCase("booktitle")==0){
-    			((Book)publication).setBooktitle(new String(ch, start, length));
+    			((Book)publication).setBooktitle(tempStr);
     		}
     	}
     	else if(articleTag){
     		if(elementTag.compareToIgnoreCase("title")==0){
-    			publication.setTitle(new String(ch, start, length));
+    			publication.setTitle(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("year")==0){
-    			publication.setYear(new String(ch, start, length));
+    			publication.setYear(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("author")==0){
-    			author = new Author(new String(ch, start, length));
-    			authorList.add(author);
+    			authorTag = true;
     		}
     		else if(elementTag.compareToIgnoreCase("journal")==0){
-    			((Article)publication).setJournal(new String(ch, start, length));
+    			((Article)publication).setJournal(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("pages")==0){
-    			((Article)publication).setPages(new String(ch, start, length));
+    			((Article)publication).setPages(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("volume")==0){
-    			((Article)publication).setVolume(new String(ch, start, length));
+    			((Article)publication).setVolume(tempStr);
     		}    		
     	}
     	else if(inproceedingsTag){
     		if(elementTag.compareToIgnoreCase("title")==0){
-    			publication.setTitle(new String(ch, start, length));
+    			publication.setTitle(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("year")==0){
-    			publication.setYear(new String(ch, start, length));
+    			publication.setYear(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("author")==0){
-    			author = new Author(new String(ch, start, length));
-    			authorList.add(author);
+    			authorTag = true;
     		}
     		else if(elementTag.compareToIgnoreCase("booktitle")==0){
-    			((Inproceedings)publication).setBooktitle(new String(ch, start, length));
+    			((Inproceedings)publication).setBooktitle(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("pages")==0){
-    			((Inproceedings)publication).setPages(new String(ch, start, length));
+    			((Inproceedings)publication).setPages(tempStr);
     		}
 			else if(elementTag.compareToIgnoreCase("crossref")==0){
-    			((Inproceedings)publication).setCrossRef(new String(ch, start, length));
+    			((Inproceedings)publication).setCrossRef(tempStr);
     		}
     	}
     	else if(incollectionTag){
     		if(elementTag.compareToIgnoreCase("title")==0){
-    			publication.setTitle(new String(ch, start, length));
+    			publication.setTitle(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("year")==0){
-    			publication.setYear(new String(ch, start, length));
+    			publication.setYear(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("author")==0){
-    			author = new Author(new String(ch, start, length));
-    			authorList.add(author);
+    			authorTag = true;
     		}
     		else if(elementTag.compareToIgnoreCase("booktitle")==0){
-    			((Incollection)publication).setBooktitle(new String(ch, start, length));
+    			((Incollection)publication).setBooktitle(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("pages")==0){
-    			((Incollection)publication).setPages(new String(ch, start, length));
+    			((Incollection)publication).setPages(tempStr);
     		}
     		else if(elementTag.compareToIgnoreCase("crossref")==0){
-    			((Incollection)publication).setcrossRef(new String(ch, start, length));
+    			((Incollection)publication).setcrossRef(tempStr);
     		}
     	}
         else if(proceedingsTag){
             if(elementTag.compareToIgnoreCase("title")==0){
-                publication.setTitle(new String(ch,start, length));
+                publication.setTitle(tempStr);
             }
             else if(elementTag.compareToIgnoreCase("year") ==0){
-                publication.setYear(new String(ch, start, length));
+                publication.setYear(tempStr);
             }
             else if(elementTag.compareToIgnoreCase("author")==0){
-                author = new Author(new String(ch, start, length));
-                authorList.add(author);
+                authorTag = true;
             }
             else if(elementTag.compareToIgnoreCase("booktitle")==0){
-                ((Proceedings)publication).setBooktitle(new String(ch, start, length));
+                ((Proceedings)publication).setBooktitle(tempStr);
             }
             else if(elementTag.compareToIgnoreCase("isbn")==0){
-                ((Proceedings)publication).setIsbn(new String(ch, start, length));
+                ((Proceedings)publication).setIsbn(tempStr);
             }
             else if(elementTag.compareToIgnoreCase("publisher")==0){
-                ((Proceedings)publication).setPublisher(new String(ch, start, length));
+                ((Proceedings)publication).setPublisher(tempStr);
             }
         }
         else if (phdthesisTag){
             if(elementTag.compareToIgnoreCase("title")==0){
-                publication.setTitle(new String(ch,start,length));
+                publication.setTitle(tempStr);
             }
             else if(elementTag.compareToIgnoreCase("year") ==0){
-                publication.setYear(new String(ch, start, length));
+                publication.setYear(tempStr);
             }
             else if(elementTag.compareToIgnoreCase("author")==0){
-                author = new Author(new String(ch, start, length));
-                authorList.add(author);
+            	authorTag = true;
             }
             else if(elementTag.compareToIgnoreCase("school")==0){
-                ((Phdthesis)publication).setSchool(new String(ch, start, length));
+                ((Phdthesis)publication).setSchool(tempStr);
             }
         }
     }
@@ -293,6 +282,11 @@ public ArrayList<Authored> getXml(){
             authored.setPublication(publication);
             authoredList.add(authored);
         }
+    	if (authorTag==true){
+    		authorTag = false;
+    		author = new Author(tempStr);
+            authorList.add(author);
+    	}
 
     }
     

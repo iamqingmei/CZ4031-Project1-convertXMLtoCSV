@@ -62,14 +62,14 @@ public class WriteToCSV {
 		System.out.println("set pub ID done:"+i);
 	}
 	
-	private String isNULL(String value){
-		if(value == null){
-			return "";
-		}
-		else{
-			return value;
-		}
-	}
+//	private String isNULL(String value){
+//		if(value == null){
+//			return "";
+//		}
+//		else{
+//			return value;
+//		}
+//	}
 	private void cleanUP(String message){
 		try {
 			fileWriter.flush();
@@ -84,7 +84,10 @@ public class WriteToCSV {
 		}
 		else{
 		if (string.contains(",")){
-			return string.replaceAll(",", "~");
+			string = string.replaceAll(",", "~");
+		}
+		if (string.contains("\"")){
+			string = string.replaceAll("\"", "-");
 		}
 		return string;
 		}
